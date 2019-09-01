@@ -1,5 +1,7 @@
 <?php
-
+/***
+ * 考试页面
+ */
 namespace app\index\controller;
 
 use think\Controller;
