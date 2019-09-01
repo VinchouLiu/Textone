@@ -1,0 +1,78 @@
+{layout name="public/layout"}
+<style type="text/css">
+		.carousel-img{
+			width: 100%;
+		}
+	</style>
+<div class="layui-carousel" id="test1">
+  <div carousel-item>
+    <div><img src="__IMG__/banner1.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner2.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner3.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner4.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner5.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner6.jpg" class="carousel-img"></div>
+    <div><img src="__IMG__/banner7.jpg" class="carousel-img"></div>
+  </div>
+</div>
+
+<div class="layui-fluid">
+    <fieldset class="layui-elem-field layui-field-title"> 
+    	<!--<legend>流体容器（宽度自适应，不固定）</legend> -->
+    	<a href="tiaozhuan" class="weui-btn weui-btn_block weui-btn_default">进入考试页面</a>
+   </fieldset>
+  <!--<div class="layui-row">
+    <div class="layui-col-sm4">
+      <div class="grid-demo grid-demo-bg1">
+      	<img src="__IMG__/banner7.jpg" class="carousel-img">
+      </div>
+    </div>
+    <div class="layui-col-sm4">
+      <div class="grid-demo grid-demo-bg1"><img src="__IMG__/banner5.jpg" class="carousel-img"></div>
+    </div>
+    <div class="layui-col-sm4">
+      <div class="grid-demo grid-demo-bg1"><img src="__IMG__/banner1.jpg" class="carousel-img"></div>
+    </div>
+  </div>-->
+</div> 
+
+<!-- <div class="layui-tab" lay-filter="demo">
+  <ul class="layui-tab-title">
+    <li class="layui-this" lay-id="111" >文章列表</li>
+    <li lay-id="222">发送信息</li>
+    <li lay-id="333">权限分配</li>
+    <li lay-id="444">审核</li>
+    <li lay-id="555">订单管理</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">1</div>
+    <div class="layui-tab-item">2</div>
+    <div class="layui-tab-item">3</div>
+    <div class="layui-tab-item">4</div>
+    <div class="layui-tab-item">5</div>
+  </div>
+</div> -->
+
+<script>
+
+layui.use('carousel', function(){
+  var carousel = layui.carousel;
+  //建造实例
+  carousel.render({
+    elem: '#test1'
+    ,width: '100%'
+    ,height: '56vw'
+    ,interval: 1000 //切换速度1
+    ,arrow: 'always' //始终显示箭头
+    //,anim: 'updown' //切换动画方式
+  });
+});
+
+layui.use('element', function(){
+  var element = layui.element;
+  
+  element.on('tab(demo)', function(data){
+    console.log(data);
+	})
+  });
+</script>

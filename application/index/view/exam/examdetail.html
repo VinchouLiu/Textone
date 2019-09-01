@@ -1,0 +1,282 @@
+{layout name="public/layout"}
+<style type="text/css">
+        .ycdiv{width:100%;height:33.33%;max-height:33.33%;background:#1E9FFF;}
+        .fangk{display:block;margin-left:5%;margin-top:2%;border:1px solid #000;width:13%;float:left;text-align:center;}
+        .fangk2{display:block;margin-left:5%;margin-top:2%;border:1px solid #000;width:13%;float:left;text-align:center;background:#01AAED;}
+        .noshow{width:100%;height:33.33%;display:none;}
+        .show{width:100%;height:33.33%;}
+    </style>
+</head>
+<body ontouchstart>
+	<div class="page uploader js_show">
+		<button class="weui-btn weui-btn_mini weui-btn_plain-default" id="showIOSDialogend" style="float:right;">交卷</button>
+        <!-- <button class="weui-btn weui-btn_mini weui-btn_default" id="showIOSDialogend">返回</button> -->
+		{volist name="data" id="v" key="k"}
+		<div id="box{$k}" class={$k==1?"show":"noshow"}>
+			<input type="hidden" id="qtype{$k}" value="{$v.question_type}">
+			<input type="hidden" id="id{$k}" value="{$v.id}">
+			<div class="page__hd" style="padding:80px 40px 0 40px;">
+	        	<!-- <h1 class="page__title">试题等等等</h1>
+	        	<p class="page__desc">{$k}.{$v.question_name}?</p> -->
+                <h3 class="page__title">{$k}.{$v.question_name}</h3>
+    		</div>
+    		{if $v.question_type==1}
+    		<!-- 单选 -->
+	    	<div class="weui-cells weui-cells_radio" style="padding: 0 40px 0 40px;">
+	    		{volist name="v.question_option" id="opt" }
+	            <label class="weui-cell weui-check__label" for="x{$v.id}{$key}">
+	                <div class="weui-cell__bd">
+	                    <p>{$key}. {$opt}</p>
+	                </div>
+	                <div class="weui-cell__ft">
+	                    <input type="radio" class="weui-check" name="radio{$k}" id="x{$v.id}{$key}">
+	                    <span class="weui-icon-checked"></span>
+	                </div>
+	            </label>
+				{/volist}
+	        </div>
+	        <!-- 单选结束 -->
+	        {elseif $v.question_type==2/}
+	        <!-- 多选 -->
+			<div class="weui-cells weui-cells_checkbox" style="padding: 0 40px 0 40px;">
+				{volist name="v.question_option" id="opt" }
+	            <label class="weui-cell weui-check__label" for="s{$v.id}{$key}">
+	                <div class="weui-cell__hd">
+	                    <!-- <input type="checkbox" class="weui-check" name="checkbox{$k}" id="s{$k}{$key}" checked="checked"> -->
+	                    <input type="checkbox" class="weui-check" name="checkbox{$k}" id="s{$v.id}{$key}">
+	                    <i class="weui-icon-checked"></i>
+	                </div>
+	                <div class="weui-cell__bd">
+	                    <p>{$key}. {$opt}</p>
+	                </div>
+	            </label>
+	            {/volist}
+	        </div>
+	        <!-- 多选结束 -->
+	        {elseif $v.question_type==3/}
+	        <!-- 判断 -->
+	    	<div class="weui-cells weui-cells_radio" style="padding: 0 40px 0 40px;">
+	    		{volist name="v.question_option" id="opt" }
+	            <label class="weui-cell weui-check__label" for="p{$v.id}{$key}">
+	                <div class="weui-cell__bd">
+	                    <p>{$key}. {$opt}</p>
+	                </div>
+	                <div class="weui-cell__ft">
+	                    <input type="radio" class="weui-check" name="judge{$k}" id="p{$v.id}{$key}">
+	                    <span class="weui-icon-checked"></span>
+	                </div>
+	            </label>
+	            {/volist}
+	        </div>
+	        <!-- 判断结束 -->
+	        {/if}
+		</div>
+		{/volist}
+
+		<div style="text-align:center;width:100%;">
+		<button onclick="moveBox('Left');" class="weui-btn weui-btn_mini weui-btn_default">上一题</button>
+		
+		<button class="weui-btn weui-btn_mini weui-btn_default" id="showIOSDialog1">答题卡</button>
+
+		<button onclick="moveBox('Right');" class="weui-btn weui-btn_mini weui-btn_default">下一题</button>
+		<!-- <button onclick="cc();" class="weui-btn weui-btn_mini weui-btn_default">提交</button> -->
+		</div>
+		
+
+    <div id="dialogs">
+        <!--BEGIN dialog1-->
+        <div class="js_dialog" id="iosDialog1" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-half-screen-dialog">
+                <div class="weui-half-screen-dialog__hd">
+                  <div class="weui-half-screen-dialog__hd__side">
+                    <button class="weui-icon-btn weui-icon-btn_close">关闭</button>
+                  </div>
+                  <div class="weui-half-screen-dialog__hd__main">
+                    <strong class="weui-half-screen-dialog__title">标题</strong>
+                  </div>
+                </div>
+                <div class="weui-half-screen-dialog__bd" style="margin-bottom:5%;">
+                    <ul style="width:100%;display:block;">
+                    	{volist name="data" id="v" key="k"}
+                    	<li id="cut{$k}" class="fangk" onclick="cut({$k})" value="">{$k}</li>
+                    	{/volist}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--END dialog1-->
+        <div class="js_dialog" id="iosDialogend" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">确认交卷</strong></div>
+                <div class="weui-dialog__bd">点击确认交卷后即认定为试卷最终确认结果,是否确认?</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="closeend">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="trueend">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+
+<script type="text/html" id="tpl_msg_success">
+<div class="page">
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-[status] weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">[msg]</h2>
+            <p class="weui-msg__desc">[content]
+            	<a href="javascript:void(0);"></a>
+            </p>
+        </div>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">返回</a>
+            </p>
+        </div>
+        <div class="weui-msg__tips-area">
+          <p class="weui-msg__tips">所有考试成绩均为测试成绩,不计入正式考试历史成绩,如要进入历史成绩点击:<a href="javascript:void(0);">历史成绩</a></p>
+        </div>
+        <div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="http://redsw.cn" class="weui-footer__link">Author:Vinchou Liu</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2019-2024 redsw.cn</p>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/javascript">
+	endexam = [];
+$(function(){
+        var $kosDialog1 = $('#iosDialog1'),
+            $iosDialogend = $('#iosDialogend');
+
+        $('#dialogs').on('click', '.weui-mask', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+        });
+        $('#dialogs').on('click', '.weui-icon-btn_close', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+        });
+
+        $('#showIOSDialog1').on('click', function(){
+            $kosDialog1.fadeIn(200);
+        });
+
+        $('#showIOSDialogend').on('click', function(){
+            $iosDialogend.fadeIn(200);
+        });
+
+        $('#closeend').on('click',function(){
+            $iosDialogend.fadeOut(200);
+        });
+
+        $('#trueend').on('click',function(){
+        	cut({:count($data)});
+        	console.log(endexam)
+        	var r = endexam.filter(function (el) {
+			  return el != null;
+			});
+        	$.ajax({
+                type:"post",
+                data:{"data":r},
+                url:'index/exam/examresult',//目标地址
+                success:function(res){
+                	console.log(res);
+                	var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。
+                    var html = document.getElementById("tpl_msg_success").innerHTML;
+                    var source = html.replace(reg,function (node, key) { 
+                    	return {'status':res.status,
+                    			'msg':res.msg,
+                    			'content':res.content}[key]; });
+                    // warn  success
+			        $("[ontouchstart]").html(source);
+                }
+            })
+        });
+
+
+        
+    });
+function cut(id){
+	var box = this.question();
+	var val = this.option(box);
+	     qid = $('#id'+box).val();
+	console.log(val);
+	if(val==null || val==""){
+        // alert("请选择答案!");
+        // return false;
+        $('#cut'+box).attr('class','fangk');
+    }
+    else{
+    	// alert(val)
+    	$('#cut'+box).attr('class','fangk2');
+    	endexam[qid] = val;
+    }
+	$('#box'+box).attr('class','noshow');
+	$('#box'+id).attr('class','show');
+	$('.js_dialog').fadeOut(200);
+	
+}
+function moveBox(direction){
+	var maxbox = {:count($data)};
+		box = this.question();
+		val = this.option(box);
+		qid = $('#id'+box).val();
+    switch(direction){
+        case 'Left':
+            left = -1;
+            break;
+        case 'Right':
+        		left = 1;
+		    if(val==null){
+		        // alert("请选择答案!");
+		        // return false;
+		        $('#cut'+box).attr('class','fangk');
+		    }
+		    else{
+		    	// alert(val)
+		    	$('#cut'+box).attr('class','fangk2');
+		    	endexam[qid] = val;
+		    }
+            break;
+    }
+    $('#box'+box).attr('class','noshow');
+    var next = box+left;
+    // console.log(next);
+    if(next<1){box=1}else if(next>=maxbox){box=maxbox}else{box=next};
+	// console.log(box);
+    $('#box'+box).attr('class','show');
+}
+function question(){
+	var box = $('.show').attr('id');
+	box =  parseInt(box.substr(3,4));
+	return box;
+}
+function option(box){
+	var qtype= $('#qtype'+box).val();
+		left = 0;
+	switch(qtype){
+		case '1':
+		var val=$('input:radio[name="radio'+box+'"]:checked').attr('id');
+		break;
+        case '2':
+        // var val=$('input:checkbox[name="checkbox'+box+'"]:checked').attr('id');
+        var val =[];//定义一个数组    
+            $('input:checkbox[name="checkbox'+box+'"]:checked').each(function(){
+            //遍历每一个名字为interest的复选框，其中选中的执行函数    
+            	val.push($(this).attr('id'));
+            	//将选中的值添加到数组chk_value中    
+            });
+        break;
+        case '3':
+        var val=$('input:radio[name="judge'+box+'"]:checked').attr('id');
+        break;
+	}
+	return val;
+}
+</script>

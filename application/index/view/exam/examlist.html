@@ -1,0 +1,119 @@
+{layout name="public/layout"}
+<div class="page uploader js_show">
+	<div class="page__hd">
+        <h1 class="page__title">试卷列表</h1>
+        <p class="page__desc">Examlist</p>
+    </div>
+	<div showcontent>
+
+        <script id="content" type="text/html">
+
+            {{each list as value i}}
+				<div class="weui-form-preview">
+		            <div class="weui-form-preview__hd">
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">试卷名称</label>
+		                    <em class="weui-form-preview__value" style="font-size:1.2em;">{{value.exam_name}}</em>
+		                </div>
+		            </div>
+		            <div class="weui-form-preview__bd">
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">试卷类型</label>
+		                    <span class="weui-form-preview__value">
+		                    	{{ if value.exam_subject==1 }} 时政
+		                    	{{ else if value.exam_subject==2 }} 法律 
+		                    	{{ else if value.exam_subject==3 }} 金融 
+		                    	{{ else if value.exam_subject==4 }} 历史 
+		                    	{{ /if }}
+		                    </span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">试卷描述</label>
+		                    <span class="weui-form-preview__value">{{value.exam_name}}</span>
+		                </div>
+		            </div>
+		            <div class="weui-form-preview__ft">
+		                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="examdetail">参加考试</a>
+		            </div>
+		        </div>
+		        <br/>
+        	{{/each}}
+    	</script>
+     </div>
+     	<div class="weui-loadmore" id="loading">
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        </div>
+</div>
+<script>
+    var swiper = new Swiper('.page uploader js_show', {
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+    $(function () {
+        var page = 1;
+        var rows = 10;
+        var loading = false;
+        var getData = function () {
+            if (loading) {
+                return;
+            }
+            loading = true;
+            //查询条件
+            var data = {};
+            data["page"] = page;//当前页码
+            data["rows"] = rows;//当前查询数量
+            $.ajax({
+                type: 'Post',
+                url: 'ajaxlist',
+                data:data,
+                success: function (data) {
+                    if (data.rows.length > 0) {
+                        $('[showcontent]').append(template('content', {
+                            list: data.rows
+                        }));
+
+                        //判断条数 来确定是否显示下一页按钮
+	                    if (rows * page < data.count) {
+	                        $("#loading").show();
+	                        page = page + 1;
+	                    }
+	                    else {
+	                        page = -1;
+	                        $("#loading").hide();
+	                        $('[showcontent]').append('<div class="weui-loadmore weui-loadmore_line">'+
+	            									  '<span class="weui-loadmore__tips">已经到底了~</span>'+
+	        										  '</div>');
+	                    }
+
+                    } else {
+                        // $('[showcontent]').append("<center style='height:60px;line-height:30px;margin-top:30px;color:#000;'>暂无数据</center>");
+                        $("#loading").hide();
+                        $('[showcontent]').append('<div class="weui-loadmore weui-loadmore_line">'+
+            '<span class="weui-loadmore__tips">暂无数据</span>'+
+        '</div>');
+                    }
+                    
+                    /*}*/
+                },
+                error: function (data) {
+                    //layer.msg('网络异常，请稍后重试！');
+                },
+                complete: function () {
+                    loading = false;
+                }
+            });
+        };
+        getData();
+        /***分页**/
+        /***分屏***/
+        $(document).scroll(function () {
+            if (page > 1) {
+                if ($(document).height() - $(document).scrollTop() - 20 <= $(window).height()) {
+                    setTimeout(getData(),2000);
+                }
+            }
+        });
+    })
+</script>
