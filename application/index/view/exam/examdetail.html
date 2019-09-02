@@ -184,7 +184,7 @@ $(function(){
         	$.ajax({
                 type:"post",
                 data:{"data":r},
-                url:'index/exam/examresult',//目标地址
+                url: "{:url('index/exam/examresult')}",//目标地址
                 success:function(res){
                 	console.log(res);
                 	var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。

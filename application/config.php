@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
+return [ 
     // +----------------------------------------------------------------------
     // | 应用设置
     // +----------------------------------------------------------------------
@@ -245,4 +245,15 @@ return [
         'name' => 'ftp6316290',
         'password' => 'Vinchou012300',
     ],
+
+    //内网穿透域名
+    'Intranet'=>'http://4brt8t.natappfree.cc/',
+
+    //微信
+    'appid' =>'wx745b356e1b426e08',
+    'secret'=>'88ac6d1339ed82bf29192d81cabdb905',
+    'notify_url'=>'http://toy.nmgjoin.com/index/Wechatnotify/unifyNotify',
+    'redirect_uri'=> 'index/login/getCode',
+    'qrCode'=> 'http://toy.nmgjoin.com/index/index/index?p_code_id=',
+    'wxtoken'=>'VinchouLiu',
 ];

@@ -1,7 +1,5 @@
 <?php
-/***
- * 考试页面
- */
+
 namespace app\index\controller;
 
 use think\Controller;
@@ -13,6 +11,11 @@ class Exam extends Controller{
     {
         parent::_initialize();
         $this->oExam = new Model_exam();
+    }
+
+    public function index()
+    {
+        echo "考试页面首页";
     }
 	/**
 	 * 考试列表页面

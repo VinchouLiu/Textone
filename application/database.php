@@ -16,8 +16,8 @@ return [
     // 'hostname'        => '43.226.149.112',
     'hostname'       => '127.0.0.1',
     // // 数据库名
-    // 'database'        => 'sfydb_6316290',
-    'database'       => 'test',
+     'database'        => 'sfydb_6316290',
+//    'database'       => 'test',
     // // 用户名
     // 'username'        => 'sfydb_6316290',
     'username'       => 'root',

@@ -1,9 +1,9 @@
 <?php
-/**
- * 首页模块 欢迎页面
- */
+
 namespace app\index\controller;
 use think\Controller;
+use think\Config;
+
 class Index extends Controller
 {
     public function index()
