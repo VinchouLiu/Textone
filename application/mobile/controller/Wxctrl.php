@@ -3,11 +3,12 @@
  * 微信操作类控制器
  */
 
-namespace app\index\controller;
+namespace app\mobile\controller;
 
 use think\Controller;
 use think\Config;
 use weixin\Weixin;
+use app\common\controller\MobileController;
 
 class Wxctrl extends Controller
 {
@@ -317,50 +318,14 @@ return false;
 
         ));
 	    echo $postJson = urldecode(json_encode($postArr));
-	    $res = $this->http_curl($url,'post','json',$postJson);
+	    $res = (new MobileController())->http_curl($url,'post','json',$postJson);
 	    dump($res);
     }
 
-    /**
-     * //功能：curl通讯
-     * @method http_curl
-     * @param  [type]    $url  [description]
-     * @param  string    $type [description]
-     * @param  string    $res  [description]
-     * @param  string    $arr  [description]
-     * @return [type]          [description]
-     */
-    public function http_curl($url,$type='get',$res='json',$arr=''){
-        //1.初始化curl
-        $ch =curl_init();
-        //2.设置curl的参数
-            curl_setopt($ch,CURLOPT_URL,$url);
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        if($type == 'post'){
-            curl_setopt($ch,CURLOPT_POST,1);
-            curl_setopt($ch,CURLOPT_POSTFIELDS,$arr);
-        }
-        // 关闭SSL验证
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        //3.采集
-        $output =curl_exec($ch);
-        //4.关闭
-        if($res=='json'){
-            if(curl_error($ch)){
-                //请求失败，返回错误信息
-                dump(curl_error($ch));
-            }else{
-                //请求成功，返回错误信息
-                $res = json_decode($output,true);
-                return $res;
-            }
-        }
-        curl_close($ch);
-    }
+    
 
     /**
-     * 微信消息推送函数
+     * 微信消息推送函数  模拟前端ajax传递信息 后端执行进入后 微信消息推送
      * @method xiaoxi
      * @return [type] [description]
      */
@@ -385,7 +350,7 @@ return false;
         $access_token = $weixin->getAccessToken();
     	$json_data=json_encode($data);//转化成json数组让微信可以接收
         $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$access_token;//模板消息请求URL
-        $res=$this->http_curl($url,'post','json',urldecode($json_data));//请求开始
+        $res=(new MobileController())->http_curl($url,'post','json',urldecode($json_data));//请求开始
 
         if($res['errcode']==0 && $res['errcode']=="ok"){
         	//发送成功

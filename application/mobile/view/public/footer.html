@@ -1,0 +1,54 @@
+{notempty name="barid"}
+<div class="page">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+
+            </div>
+            <div class="weui-tabbar">
+                <a href="{:url('mobile/index/index')}" class="weui-tabbar__item weui-bar__item{$barid==1?'_on':''}">
+                        <img src="__IMG__/index.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">首页</p>
+                </a>
+                <a href="{:url('mobile/exam/examlist')}?barid=2" class="weui-tabbar__item weui-bar__item{$barid==2?'_on':''}">
+                    <img src="__IMG__/category.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">分类</p>
+                </a>
+                <a href="{:url('mobile/project/index')}?barid=3" class="weui-tabbar__item weui-bar__item{$barid==3?'_on':''}">
+                    <span style="display: inline-block;position: relative;">
+                        <img src="__IMG__/project.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
+                    </span>
+                    <p class="weui-tabbar__label">发现</p>
+                </a>
+                <a href="{:url('mobile/exam/examlist')}?barid=4" class="weui-tabbar__item weui-bar__item{$barid==4?'_on':''}">
+                    <span style="display: inline-block;position: relative;">
+                    <img src="__IMG__/mine.png" alt="" class="weui-tabbar__icon">
+                    <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
+                    </span>
+                    <p class="weui-tabbar__label">我</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{/notempty}
+<script type="text/javascript">
+    $(function(){
+        $('.weui-tabbar__item').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+        });
+    });
+</script>
+<div class="footer" style="margin-top:16vw;">
+	<!-- <p>版权所有：内蒙古公益事业发展基金会&nbsp;&nbsp; 电话：0471-3255091</p>
+	<p>蒙ICP备17003467号-1　&nbsp; 技术支持：<a href="http://www.nmgjoin.com/">灵集科技</a>&nbsp; <img src="cnzz.png" alt=""></p> -->
+	<div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="http://redsw.cn" class="weui-footer__link">Author:Vinchou Liu</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2019-2024 redsw.cn</p>
+            </div>
+    </div>
+</div>

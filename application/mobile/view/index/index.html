@@ -1,0 +1,219 @@
+{layout name="public/layout"}
+    <style>
+    .carousel-img{
+      width: 100%;
+    }
+    .layui-carousel-ind ul {
+        margin-right:4%; 
+        float: right;
+        margin-top: -6vw;
+        padding: 0px;
+        background-color: rgba(0,0,0,0);
+    }
+    .layui-carousel-ind li {
+      width: 8px;
+        height: 8px;
+    }
+    </style>
+<section class="scrollView">
+  <!-- 搜索开始 -->
+    <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form" action="{:url('mobile/news/searchresult')}">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+      </div>
+      <!-- 实时搜索 关键字提醒 -->
+      <!-- <div class="weui-cells searchbar-result" id="searchResult" style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1); display: none;">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+        </div> -->
+        <!-- 搜索结束 -->
+    <!-- 轮播开始 -->
+    <div class="layui-carousel" id="test1">
+      <div carousel-item>
+        <div><img src="__IMG__/banner1.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner2.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner3.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner4.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner5.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner6.jpg" class="carousel-img"></div>
+        <div><img src="__IMG__/banner7.jpg" class="carousel-img"></div>
+      </div>
+    </div>
+    <!-- 轮播结束 -->
+    <!-- 首页导航开始 -->
+    <div class="palace">
+        <div class="palace-one">
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>我的银行卡</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>优惠券</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>我的邀请</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>信用卡申请</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>交易查询</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>信息认证</h2>
+          </div>
+        </a>
+        <a href="javascript:;" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>认证中心</h2>
+          </div>
+        </a>
+        <a href="{:url('mobile/project/index')}" class="palace-grid">
+          <div class="palace-grid-icon">
+            <img src="__IMG__/project.png" alt="">
+          </div>
+          <div class="palace-grid-text">
+            <h2>更多</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- 首页导航结束 -->
+    <!-- 推荐栏目开始 -->
+        <!-- 本周上线  考试各种 -->
+        <!-- 名人讲堂 公开课  课程详情  课程各种  更多..学习-->
+        <!-- 精华贴  讨论留言各种  更多..学习-->
+        <!-- 课程任务 练习任务 -->
+    <!-- 推荐栏目结束 -->
+    
+</section>
+
+<script type="text/javascript">
+  //搜索
+    $(function(){
+        var $searchBar = $('#searchBar'),
+            $searchResult = $('#searchResult'),
+            $searchText = $('#searchText'),
+            $searchInput = $('#searchInput'),
+            $searchClear = $('#searchClear'),
+            $searchCancel = $('#searchCancel');
+
+        function hideSearchResult(){
+            $searchResult.hide();
+            $searchInput.val('');
+        }
+        function cancelSearch(){
+            hideSearchResult();
+            $searchBar.removeClass('weui-search-bar_focusing');
+            $searchText.show();
+            alert('123');
+        }
+
+        $searchText.on('click', function(){
+            $searchBar.addClass('weui-search-bar_focusing');
+            $searchInput.focus();
+        });
+        $searchInput
+            .on('blur', function () {
+                if(!this.value.length) cancelSearch();
+            })
+            .on('input', function(){
+                if(this.value.length) {
+                    $searchResult.show();
+                } else {
+                    $searchResult.hide();
+                }
+            })
+        ;
+        $searchClear.on('click', function(){
+            hideSearchResult();
+            $searchInput.focus();
+        });
+        $searchCancel.on('click', function(){
+            cancelSearch();
+            $searchInput.blur();
+        });
+    });
+</script>
+<script>
+//轮播
+layui.use('carousel', function(){
+  var carousel = layui.carousel;
+  //建造实例
+  carousel.render({
+    elem: '#test1'
+    ,width: '100%'
+    ,height: '56vw'
+    ,interval: 3000 //切换速度3
+    ,arrow: 'none' //始终不显示箭头
+    //,anim: 'updown' //切换动画方式
+  });
+});
+
+layui.use('element', function(){
+  var element = layui.element;
+  
+  element.on('tab(demo)', function(data){
+    console.log(data);
+    })
+  });
+</script>

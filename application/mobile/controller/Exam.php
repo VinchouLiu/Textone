@@ -1,9 +1,9 @@
 <?php
 
-namespace app\index\controller;
+namespace app\mobile\controller;
 
 use think\Controller;
-use app\index\model\Model_exam;
+use app\mobile\model\Model_exam;
 
 class Exam extends Controller{
 
@@ -19,6 +19,8 @@ class Exam extends Controller{
 	 */
 	public function examlist()
 	{
+        $barid = input('get.barid');
+        $this->assign('barid',$barid);
 		return $this->fetch();
 	}
 

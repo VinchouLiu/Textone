@@ -247,11 +247,11 @@ return [
     ],
 
     //内网穿透域名
-    'Intranet'=>'http://4brt8t.natappfree.cc/',
+    'Intranet'=>'http://kw4wbd.natappfree.cc/',
 
     //微信
-    'appid' =>'wx745b356e1b426e08',
-    'secret'=>'88ac6d1339ed82bf29192d81cabdb905',
+    'appid' =>'wxf0c59e6959648ebb',
+    'secret'=>'2d59a9fc4f3e5e1add100aafd62dd173',
     'notify_url'=>'http://toy.nmgjoin.com/index/Wechatnotify/unifyNotify',
     'redirect_uri'=> 'index/login/getCode',
     'qrCode'=> 'http://toy.nmgjoin.com/index/index/index?p_code_id=',

@@ -8,8 +8,16 @@
     </style>
 </head>
 <body ontouchstart>
+    <div class="startbar">
+        <span class="sf-back">
+            <a href="javascript:history.back();"><span class="iconfont icon-fanhui"></span></a>
+        </span>
+            <span class="sf-title hide">
+                真题考试
+            </span>
+    </div>
 	<div class="page uploader js_show">
-		<button class="weui-btn weui-btn_mini weui-btn_plain-default" id="showIOSDialogend" style="float:right;">交卷</button>
+		
         <!-- <button class="weui-btn weui-btn_mini weui-btn_default" id="showIOSDialogend">返回</button> -->
 		{volist name="data" id="v" key="k"}
 		<div id="box{$k}" class={$k==1?"show":"noshow"}>
@@ -81,6 +89,9 @@
 		<button onclick="moveBox('Right');" class="weui-btn weui-btn_mini weui-btn_default">下一题</button>
 		<!-- <button onclick="cc();" class="weui-btn weui-btn_mini weui-btn_default">提交</button> -->
 		</div>
+        <div style="text-align:center;width:100%;">
+        <button class="weui-btn weui-btn_mini weui-btn_plain-default" id="showIOSDialogend" style="margin-top:4vw">交卷</button>
+        </div>
 		
 
     <div id="dialogs">
@@ -184,7 +195,7 @@ $(function(){
         	$.ajax({
                 type:"post",
                 data:{"data":r},
-                url:"{url('index/exam/examresult')}",//目标地址
+                url:"examresult",//目标地址
                 success:function(res){
                 	console.log(res);
                 	var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。
